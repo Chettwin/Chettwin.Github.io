@@ -10,7 +10,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   
-      <title>first blog - Hexo</title>
+      <title>操作系统复习要点 - Hexo</title>
   
 
   
@@ -111,7 +111,7 @@
 
 <div class="toc-container">
 <i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程-process-VS线程-thread"><span class="toc-number">1.</span> <span class="toc-text">进程(process)VS线程(thread)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储设备"><span class="toc-number">2.</span> <span class="toc-text">存储设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻址"><span class="toc-number">3.</span> <span class="toc-text">寻址</span></a></li></ol>
 </div>
 <div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
     <img src="/images/icons/blue-shadow/toc.svg" alt="">
@@ -202,14 +202,14 @@
 
 
 
-<article class="article" id="/2018/12/17/first-blog/" data-name="first blog" data-version="">
+<article class="article" id="/2018/12/23/operatingSystem/" data-name="操作系统复习要点" data-version="">
 
     <!-- Title -->
     <div class="article-header">
          
          <h1 class="article-title">
-            <a href="/2018/12/17/first-blog/">
-                First Blog
+            <a href="/2018/12/23/operatingSystem/">
+                操作系统复习要点
             </a>
         </h1>
         <!-- TODO: support nested categories,display them nicely -->
@@ -219,7 +219,7 @@
     <!-- Date and Author -->
     <div class="article-meta">
     <ul>
-            <li><i class="fa fa-calendar"></i> 2018-12-17</li>
+            <li><i class="fa fa-calendar"></i> 2018-12-23</li>
             
             <li><i class="fa fa-user"></i> John Doe</li>
             <li><i class="fas fa-copyright"></i>
@@ -287,7 +287,7 @@
   <h3>Quick Read</h3>
 </div>
 <div class="card-text">
-  <p id="text-post-summary">这是第一片博客文章</p>
+  <p id="text-post-summary">进程(process)VS线程(thread) ...</p>
 </div>
         </div> -->
     </div>
@@ -305,7 +305,7 @@
 
 <div class="toc-container">
 <i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程-process-VS线程-thread"><span class="toc-number">1.</span> <span class="toc-text">进程(process)VS线程(thread)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储设备"><span class="toc-number">2.</span> <span class="toc-text">存储设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻址"><span class="toc-number">3.</span> <span class="toc-text">寻址</span></a></li></ol>
 </div>
 <div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
     <img src="/images/icons/blue-shadow/toc.svg" alt="">
@@ -313,7 +313,24 @@
 
     </div>
     <div class="article-content">
-    <p> 这是第一片博客文章</p>
+    <h2 id="进程-process-VS线程-thread"><a href="#进程-process-VS线程-thread" class="headerlink" title="进程(process)VS线程(thread)"></a>进程(process)VS线程(thread)</h2><p>  &nbsp;&nbsp;要理解进程与线程的区别，如果弄清楚了进程与线程二者的构成的话，就会很容易地明白二者的不同。</p>
+<ol>
+<li>进程：包含线程、内存、文件/网络句柄(handle)。<ul>
+<li>线程：一个进程包含多个线程，线程之间共享os为该进程分配的一块内存。</li>
+<li>内存：由os分配，每个进程os都为其分配一个固定大小的内存（寻址空间）,这个内存是<strong>逻辑内存</strong>，并非实际的物理内存。例如：32位机器给每个进程分配的内存大小是2^32字节，即4G的空间。并且，每个进程间的<strong>内存相互独立</strong>，想想如果不独立的话，一个进程就可以改动其他进程所指的内存空间，这是非常不安全的。这还涉及到进程间相互通信的问题。内存的内部组成如下图所示：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/process-RAM.png" alt="process-ram" title="进程运行时的内存"></li>
+<li>文件/网络句柄：与内存不同，这些资源是各个进程间<strong>共享</strong>的，不属于固定某一个进程独有。任两个进程间都可以访问同一个文件，或者去抢用同一个网络的端口。<br><img src="img/process.png" alt="process" title="进程"></li>
+</ul>
+</li>
+<li>线程：包含调用堆栈、程序计数器(PC)、ThreadLocalStorage。<ul>
+<li>调用堆栈：堆与栈是不同的数据结构，其实只有调用栈，堆在这个短语中无实际意义，只是一种习惯称呼。线程的入口main函数会把每次函数的调用信息压入栈中，包括参数、返回地址与局部变量等信息。</li>
+<li>程序计数器：ProgramCounter，存放线程应执行的当前或者下一条指令指针，该指针指向的地址是进程所占据的内存中的一个地址。</li>
+<li>TLS：每个线程的独立内存，在这里分配一些变量，这些变量是线程独有的数据。<br><img src="img/thread.png" alt="thread" title="线程"><br>&nbsp;&nbsp;P.S:大多数计算机都是存储程序型的，即运行时的数据与代码存储在同一段内存当中，这也会导致常见的漏洞，如：缓冲区溢出–运行产生的数据超出原分配的内存大小，以致于影响到代码区域，黑客可以通过这种方式从程序外部植入代码。</li>
+</ul>
+</li>
+</ol>
+<p>&nbsp;&nbsp;<strong>在看完二者的组成之后，区别也就显而易见了：一个程序运行时，就会在操作系统中产生一个进程，并且os会未其分配一块固定大小的内存（大小由os的决定）,进程只是一个容器，其中真正运行的是一个个线程。</strong></p>
+<h2 id="存储设备"><a href="#存储设备" class="headerlink" title="存储设备"></a>存储设备</h2><p>  &nbsp;&nbsp;计算机存储设备包含四个层次：硬盘(磁能)、内存(电能)、缓存与寄存器。速度由慢到快，价格由便宜到高昂，离cpu由远及近。缓存为cpu与内存间的比内存更快的存储设备，一般有多级缓存。寄存器为cpu内部的存储设备，用于存储下一条要操作的指令等。</p>
+<h2 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h2><p>  &nbsp;&nbsp;在程序运行时，经常会涉及到操作系统寻址的过程。即将数据从实际的内存单元读入到寄存器的过程。对于32位系统，每个进程可寻址的空间为2^32字节，32位cpu可一次性处理4个字节的指令。64位系统则可寻址空间位2^64字节，64位cpu可一次性处理8个字节的指令。<br>  &nbsp;&nbsp;比如下图所示的指令，则操作系统在对p指向的内存地址寻址时做出以下动作：先找到指针所指向的进程内的逻辑内存，再映射到实际的内存上，若映射到的是虚拟内存(内存交换区)，则从磁盘上读出其所在的页进入物理内存中。之后再读入寄存器中。<br>  <img src="img/addressing.png" alt="addressing" title="寻址"></p>
 
     
     </div>
@@ -369,7 +386,7 @@
 
 <div class="toc-container">
 <i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程-process-VS线程-thread"><span class="toc-number">1.</span> <span class="toc-text">进程(process)VS线程(thread)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储设备"><span class="toc-number">2.</span> <span class="toc-text">存储设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻址"><span class="toc-number">3.</span> <span class="toc-text">寻址</span></a></li></ol>
 </div>
 <div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
     <img src="/images/icons/blue-shadow/toc.svg" alt="">
@@ -449,7 +466,7 @@
   loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
   loadjs.ready('post-version', function(){
     
-    new Postv2('hashit_eee8d35f0a91cf7b90aed59019d3fbf03f3d45a84415a3fa701c31c5c816e470').update('hashit_64c67f3c9c680579516e4e286cc8487929379d11db8fb1cc449d940ce581bec9', function(){});
+    new Postv2('hashit_50f29cc90f822f9a93cda2fc0b93a7a29958d46715f2f9a9b3bd94aa1bedcbf0').update('hashit_3da432a756fe5d1fbe638db690be86dfa8203dd391ad0a70984fc3fcdfcb0077', function(){});
   });
   
 </script>
